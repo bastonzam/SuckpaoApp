@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "143024477040",
+    "firebase_url": "https://fullsuckpao.firebaseio.com",
+    "project_id": "fullsuckpao",
+    "storage_bucket": "fullsuckpao.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143024477040:android:75dda491c11780b9be35b5",
+        "android_client_info": {
+          "package_name": "com.example.nattapon.mysuckpao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143024477040-ds4qc54eanlbclllmtgl9krl5j1c39hp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nattapon.mysuckpao",
+            "certificate_hash": "195afb450d6551db2a14a718bc72fac03204dcc7"
+          }
+        },
+        {
+          "client_id": "143024477040-tcfh2g0r8n26piv7eliab65f1tb2rr9b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQ-ZXcBskxGtoVJLFa9AQHADhiafoPkXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143024477040-tcfh2g0r8n26piv7eliab65f1tb2rr9b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
