@@ -21,9 +21,12 @@ class RegisterActivity : AppCompatActivity() {
         val TAG = "RegisterActivity"
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+
 
         sign_upBtn.setOnClickListener {
             performRegister()
@@ -120,7 +123,7 @@ class RegisterActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
-        val user = User(uid, username_register.text.toString(), profileImageUrl)
+        val user = User(uid, username_register.text.toString(), profileImageUrl,useremail_register.text.toString())
 
         ref.setValue(user)
             .addOnSuccessListener {
@@ -136,4 +139,3 @@ class RegisterActivity : AppCompatActivity() {
 
 }
 
-class User(val uid: String, val username: String, val profileImageUrl: String)

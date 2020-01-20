@@ -6,15 +6,21 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_register.*
+import java.lang.Exception
 
 class HomeActivity : AppCompatActivity() {
+
+
+
+
+
+
 
 
 
@@ -25,22 +31,111 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         verifyUserIsLoggedIn()
 
+/*
+        val type = arrayOf("เสื้อ","กางเกง")
+        val mySpinner = findViewById(R.id.spinner1)as Spinner
+
+        var adapter = ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,type)
+
+        mySpinner.adapter=adapter
+
+        mySpinner.onItemSelectedListener=object :AdapterView.OnItemSelectedListener{
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View, i: Int, id: Long
+            )
+            {
+                Toast.makeText(this@HomeActivity,type[i],Toast.LENGTH_SHORT).show()
+
+            } override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+
+        }
+        val num = arrayOf("1","2","3","4","5","6","7","8","9","10")
+        val mySpinner2 = findViewById(R.id.spinner2)as Spinner
+
+        var adapter2 = ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,type)
+
+        mySpinner2.adapter=adapter2
+
+        mySpinner2.onItemSelectedListener=object :AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View, i: Int, id: Long
+            ) {
+                Toast.makeText(this@HomeActivity, num[i], Toast.LENGTH_SHORT).show()
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
+        val laundry = arrayOf("รีด","ไม่รีด")
+        val mySpinner3 = findViewById(R.id.spinner3)as Spinner
+
+        var adapter3 = ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,type)
+
+        mySpinner3.adapter=adapter3
+
+        mySpinner3.onItemSelectedListener=object :AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View, i: Int, id: Long
+            ) {
+                Toast.makeText(this@HomeActivity, laundry[i], Toast.LENGTH_SHORT).show()
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
+        val store = arrayOf("ป้าใต้หอ ","ลุงข้างบ้าน")
+        val mySpinner4 = findViewById(R.id.spinner4)as Spinner
+
+        var adapter4 = ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,type)
+
+        mySpinner4.adapter=adapter4
+
+        mySpinner4.onItemSelectedListener=object :AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View, i: Int, id: Long
+            ) {
+                Toast.makeText(this@HomeActivity, store[i], Toast.LENGTH_SHORT).show()
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
+*/
+
 
         buttonSave.setOnClickListener {
+
+
             saveOrder()
         }
+
+
+
+
 
     }
 
     private fun saveOrder(){
-        val num =spinner2.textAlignment.toString()
-        val type =spinner1.textAlignment.toString()
-        val laundry =spinner3.textAlignment.toString()
-        val store =spinner4.textAlignment.toString()
+        val num =spinner2.selectedItem.toString()
+        val type =spinner1.selectedItem.toString()
+        val laundry =spinner3.selectedItem.toString()
+        val store =spinner4.selectedItem.toString()
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/order/$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("order/$uid")
 
-        val order = Order(uid, type,num,laundry,store)
+        val order = Order(uid,type,num,laundry,store)
 
         ref.setValue(order)
             .addOnSuccessListener {
@@ -64,6 +159,10 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.menu_new_order -> {
+                val intent=Intent(this,OrderData::class.java)
+                startActivity(intent)
+                showToast("Enter pass")
+
 
             }
             R.id.menu_sign_out -> {
@@ -85,6 +184,12 @@ class HomeActivity : AppCompatActivity() {
 
 
 
-}
 
-class Order(val uid: String, val Type: String, val Num: String, val Laundry: String, val Store: String)
+}
+class Order(   val uid: String,
+               val Type: String,
+               val Num: String,
+               val Laundry: String,
+               val Store: String)
+
+

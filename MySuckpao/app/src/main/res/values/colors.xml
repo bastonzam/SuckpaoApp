@@ -18,4 +18,7 @@
     <color name="orangcoverPrimary">#FF5722</color>
     <color name="orangcoverPrimaryDark">#AF3C1B</color>
     <color name="orangcoverAccent">#D81B60</color>
+    <color name="graytext">#C7C7C7</color>
+    <color name="green1but">#1CE595</color>
+    <color name="green2but">#43C0AB</color>
 </resources>

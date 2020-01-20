@@ -17,6 +17,14 @@ class LoginActivity : AppCompatActivity() {
 
         btn_log_in.setOnClickListener {
             performLogin()
+
+        }
+        forgotpassword.setOnClickListener {
+
+        }
+        donhaveaccount.setOnClickListener {
+            val intent=Intent(this,RegisterActivity::class.java)
+            startActivity(intent)
         }
 
 

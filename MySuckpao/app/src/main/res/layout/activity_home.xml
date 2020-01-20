@@ -14,7 +14,6 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/bg_padcard"
         android:gravity="center"
@@ -22,14 +21,14 @@
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="128dp"
@@ -44,27 +43,11 @@
 
 
         <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="128dp"
-            android:background="@drawable/bg_edit_text3"
-            android:entries="@array/num_list"
-
-            android:spinnerMode="dropdown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner1" />
-
-
-        <Spinner
             android:id="@+id/spinner3"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="128dp"
             android:background="@drawable/bg_edit_text3"
             android:entries="@array/laundry_list"
@@ -75,11 +58,26 @@
             app:layout_constraintTop_toBottomOf="@+id/spinner2" />
 
         <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="128dp"
+            android:background="@drawable/bg_edit_text3"
+            android:entries="@array/num_list"
+
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner1" />
+
+        <Spinner
             android:id="@+id/spinner4"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="128dp"
             android:background="@drawable/bg_edit_text3"
             android:entries="@array/store_list"
@@ -94,7 +92,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/button_background"
             android:text="Save order"
@@ -148,4 +146,6 @@
             app:layout_constraintStart_toEndOf="@+id/spinner4"
             app:layout_constraintTop_toTopOf="@+id/spinner4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_login2"
+    android:background="@drawable/bg_edit_text3"
     tools:context=".RegisterActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/bg_padcard"
+        android:background="@drawable/bg_edit_text3"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,8 +47,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:background="@drawable/bg_edit_text3"
-            android:drawableStart="@drawable/ic_user"
+            android:background="@drawable/bg_gray"
             android:drawablePadding="10dp"
             android:hint="User name"
             android:padding="10dp"
@@ -63,8 +62,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
-            android:background="@drawable/bg_edit_text3"
-            android:drawableStart="@drawable/ic_user"
+            android:background="@drawable/bg_gray"
             android:drawablePadding="10dp"
             android:hint="Email"
             android:inputType="textEmailAddress"
@@ -80,8 +78,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
-            android:background="@drawable/bg_edit_text3"
-            android:drawableStart="@drawable/ic_password"
+            android:background="@drawable/bg_gray"
             android:drawablePadding="10dp"
             android:hint="Password"
             android:inputType="textPassword"
@@ -97,7 +94,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/button_background"
+            android:background="@drawable/bg_btn4"
             android:padding="16dp"
             android:text="SIGN UP"
             android:textAllCaps="false"
@@ -120,30 +117,18 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/btn_sign_up1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="80dp"
-        android:text="Already have account?"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <TextView
         android:id="@+id/sign_upBtn_login"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="48dp"
-        android:text="Log in"
-        android:textColor="@color/colorAccent"
+        android:text="Already have account? Log in"
+        android:textColor="@color/green2but"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.204"
-        app:layout_constraintStart_toEndOf="@+id/btn_sign_up1"
-        app:layout_constraintTop_toTopOf="@+id/btn_sign_up1" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
