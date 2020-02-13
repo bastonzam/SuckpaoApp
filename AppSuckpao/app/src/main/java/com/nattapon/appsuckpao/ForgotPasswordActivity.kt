@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_forgot_password.*
 
 class ForgotPasswordActivity : AppCompatActivity() {
 
@@ -25,6 +26,10 @@ class ForgotPasswordActivity : AppCompatActivity() {
         setContentView(R.layout.activity_forgot_password)
 
         initialise()
+        btnReturn.setOnClickListener {
+            val i =Intent(this,Login::class.java)
+            startActivity(i)
+        }
     }
 
     private fun initialise() {
@@ -41,18 +46,18 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 .sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val message = "Email sent."
+                        val message = "ส่งอีเมล์เพื่อรีเซตรหัสผ่านแล้ว"
                         Log.d(TAG, message)
                         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                         updateUI()
                     } else {
                         Log.w(TAG, task.exception!!.message)
-                        Toast.makeText(this, "No user found with this email.", Toast.LENGTH_SHORT)
+                        Toast.makeText(this, "ไม่รู้จักอีเมล์ กรุรากรอกอีเมล์ใหม่", Toast.LENGTH_SHORT)
                             .show()
                     }
                 }
         } else {
-            Toast.makeText(this, "Enter Email", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "กรอก อีเมล์", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -1,5 +1,6 @@
 package com.nattapon.appsuckpao
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -18,9 +19,13 @@ class Login : AppCompatActivity() {
 
     private var mIsShowpass=false
 
+    private var mProgressBar: ProgressDialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        mProgressBar = ProgressDialog(this)
 
 
 
@@ -60,6 +65,11 @@ class Login : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
+
+
+
+                mProgressBar!!.setMessage("กำลังล็อกอิน")
+                mProgressBar!!.show()
 
                 Snackbar.make(findViewById(R.id.login),"ล็อกกินสำเร็จ",Snackbar.LENGTH_LONG).show()
 

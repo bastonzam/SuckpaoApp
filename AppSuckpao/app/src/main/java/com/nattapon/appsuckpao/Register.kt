@@ -1,6 +1,7 @@
 package com.nattapon.appsuckpao
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -43,10 +44,7 @@ class Register : AppCompatActivity() {
 
 
 
-   // lateinit var  checkbox:AppCompatCheckBox
-   // lateinit var autoTextView: AppCompatAutoCompleteTextView
-   // lateinit var autoTextViewCustom:AppCompatAutoCompleteTextView
-   // lateinit var edtPassword:EditText
+
 
     private var mDatabaseReference: DatabaseReference? = null
     private var mDatabase: FirebaseDatabase? = null
@@ -65,9 +63,15 @@ class Register : AppCompatActivity() {
 
     private var mIsShowpass=false
 
+    private var mProgressBar: ProgressDialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+
+        mProgressBar = ProgressDialog(this)
+
 
         ivShowHidePassword.setOnClickListener{
             mIsShowpass= !mIsShowpass
@@ -102,9 +106,7 @@ class Register : AppCompatActivity() {
             intent.type = "image/*"
             startActivityForResult(intent, 0)
 
-            //profile
-           // checkbox =  findViewById(R.id.checkbox)
-           // edtPassword =findViewById(R.id.password_register)
+
 
 
 
@@ -170,10 +172,12 @@ class Register : AppCompatActivity() {
 
         ref.putFile(selectedPhotoUri!!)
             .addOnSuccessListener {
-                Log.d(TAG, "Successfully uploaded image: ${it.metadata?.path}")
+                //Log.d(TAG, "Successfully uploaded image: ${it.metadata?.path}")
 
                 ref.downloadUrl.addOnSuccessListener {
                     Log.d(TAG, "File Location: $it")
+                    mProgressBar!!.setMessage("Registering User...")
+                    mProgressBar!!.show()
 
                     saveUserToFirebaseDatabase(it.toString())
                 }
@@ -198,7 +202,7 @@ class Register : AppCompatActivity() {
 
 
 
-        //val userid=ref.push().key
+
         val currentUserDb = mDatabaseReference!!.child(userId)
 
         currentUserDb.child("uid").setValue(userId)
@@ -209,10 +213,7 @@ class Register : AppCompatActivity() {
         currentUserDb.child("lastname").setValue(lastName)
         currentUserDb.child("address").setValue(address)
 
-        //val user = User(userId,username_register.text.toString(), profileImageUrl,useremail_register.text.toString(),
-           // name_register.text.toString(),lastname_register.text.toString(),address_register.text.toString())
 
-        //ref.child(userId).setValue(user)
             .addOnSuccessListener {
                 Log.d("Main", "Finally we saved the order to Firebase Database")
                 Toast.makeText(this,"Success!", Toast.LENGTH_LONG).show()

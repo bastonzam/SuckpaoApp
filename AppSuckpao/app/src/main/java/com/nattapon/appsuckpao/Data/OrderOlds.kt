@@ -1,6 +1,7 @@
 package com.nattapon.appsuckpao.Data
 
-class Order(val orderid:String,
+
+class OrderOlds(val orderid:String,
             val num:String,
             val laundry:String,
             val store:String,

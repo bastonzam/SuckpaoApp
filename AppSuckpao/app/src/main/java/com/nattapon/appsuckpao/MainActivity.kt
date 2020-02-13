@@ -1,17 +1,21 @@
 package com.nattapon.appsuckpao
 
 import android.app.Activity
+import android.app.ProgressDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ListView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +23,7 @@ import com.google.firebase.database.*
 import com.nattapon.appsuckpao.Adapter.OrderAdapter
 import com.nattapon.appsuckpao.Data.Order
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.orders.*
 import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +39,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var locationRequest: LocationRequest
     lateinit var locationCallback: LocationCallback
 
+    //progressbar
+    private var mProgressBar: ProgressDialog? = null
+
 
     val REQUEST_CODE=1000
 
@@ -41,7 +49,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //checkpermission
+        //progressbar
+        mProgressBar = ProgressDialog(this)
+
+        //checkpermission //takelocation
 
         if(ActivityCompat.shouldShowRequestPermissionRationale(this,android.Manifest.permission.ACCESS_FINE_LOCATION))
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),REQUEST_CODE)
@@ -86,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        ///////////////showorder
+
 
 
 
@@ -99,6 +110,7 @@ class MainActivity : AppCompatActivity() {
 
 
         }
+
 
 
 
@@ -137,11 +149,49 @@ class MainActivity : AppCompatActivity() {
         val laundry =spinner3.selectedItem.toString()
         val store =spinner4.selectedItem.toString()
         val place =txt_location.text.toString()
+        val detail =etDetail.text.toString()
+
 
         val ref = FirebaseDatabase.getInstance().getReference("order/$uid")
 
         val orderid=ref.push().key
-        val order = Order(orderid!!, num, laundry, store, "wait",place)
+        val order = Order(orderid!!, num, laundry, store, "wait",place,detail,"-")
+
+        ref.child(orderid).setValue(order)
+            .addOnSuccessListener {
+
+                mProgressBar!!.setMessage("กำลังส่งออเดอร์")
+                mProgressBar!!.show()
+                Log.d("Main", "Finally we saved the order to Firebase Database")
+                Toast.makeText(this,"ส่งออเดอร์สำเร็จ!", Toast.LENGTH_LONG).show()
+                mProgressBar!!.hide()
+            }
+            .addOnFailureListener {
+                Log.d("Main", "Failed to set value to database: ${it.message}")
+            }
+
+
+    }
+
+    fun saveorderold(){
+
+
+
+
+
+
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+
+        val num =spinner2.selectedItem.toString()
+        val laundry =spinner3.selectedItem.toString()
+        val store =spinner4.selectedItem.toString()
+        val place =txt_location.text.toString()
+        val detail =etDetail.text.toString()
+
+        val ref = FirebaseDatabase.getInstance().getReference("orderold/$uid")
+
+        val orderid=ref.push().key
+        val order = Order(orderid!!, num, laundry, store, "wait",place,detail,"-")
 
         ref.child(orderid).setValue(order)
             .addOnSuccessListener {
@@ -181,10 +231,22 @@ class MainActivity : AppCompatActivity() {
 
             }
             R.id.menu_sign_out -> {
-                FirebaseAuth.getInstance().signOut()
-                val intent = Intent(this, Login::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+
+
+                val builder= AlertDialog.Builder(this)
+                    builder.setTitle("ออกจากระบบ")
+                    builder.setMessage("แน่ใจหรือไม่ว่าต้องการออกจากระบบ")
+
+                    builder.setPositiveButton("ใช่",{ dialogInterface: DialogInterface, i: Int ->
+                        logout()
+                    })
+
+                    builder.setNegativeButton("ไม่",{ dialogInterface: DialogInterface, i: Int -> })
+                builder.show()
+
+
+
+
             }
         }
 
@@ -194,6 +256,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_menu, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+    fun logout(){
+        FirebaseAuth.getInstance().signOut()
+        val intent = Intent(this, Login::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }
 

@@ -62,6 +62,7 @@ class Profile : AppCompatActivity() {
             showUpdate()
             Log.d("Profile","Click on update")
         }
+
     }
     private fun initialise() {
         mDatabase = FirebaseDatabase.getInstance()
@@ -109,13 +110,34 @@ class Profile : AppCompatActivity() {
         val userId  =  mAuth!!.currentUser!!.uid
 
 
+
         val view = LayoutInflater.from(this).inflate(R.layout.update_user,null)
         val builder=AlertDialog.Builder(this).setTitle("แก้ไขโปรไฟล์").setView(view)
 
-        val alertDialog=builder.show()
-        view.buttonUpdates.setOnClickListener {
-            alertDialog.dismiss()
-            val username=view.editTextUsername.text.toString()
+//        val alertDialog=builder.show()
+//        view.buttonUpdates.setOnClickListener {
+//            alertDialog.dismiss()
+
+            val editText=view.findViewById<EditText>(R.id.editTextUsername)
+            editText.setText(tvUsername?.text.toString())
+
+        val editText2=view.findViewById<EditText>(R.id.editTextName)
+        editText2.setText(tvFirstName?.text.toString())
+
+        val editText3=view.findViewById<EditText>(R.id.editTextlastname)
+        editText3.setText(tvLastName?.text.toString())
+
+        val editText4=view.findViewById<EditText>(R.id.editTextEmail)
+        editText4.setText(tvEmail?.text.toString())
+
+        val editText5=view.findViewById<EditText>(R.id.editTextAddress)
+        editText5.setText(tvAddress?.text.toString())
+
+        builder.setView(view)
+        builder.setPositiveButton("Update"){p0,p1->
+
+
+            val username=editText.text.toString()
             var updateUserName=username
             var map= mutableMapOf<String,Any>()
             map["username"]= updateUserName
@@ -126,7 +148,7 @@ class Profile : AppCompatActivity() {
                 .updateChildren(map)
 
 
-            val name=view.editTextName.text.toString()
+            val name=editText2.text.toString()
             var updateName=name
             var map1= mutableMapOf<String,Any>()
             map1["name"]= updateName
@@ -137,7 +159,7 @@ class Profile : AppCompatActivity() {
                 .updateChildren(map1)
 
 
-            val lastname=view.editTextlastname.text.toString()
+            val lastname=editText3.text.toString()
             var updateLastName=lastname
             var map2= mutableMapOf<String,Any>()
             map2["lastname"]= updateLastName
@@ -148,7 +170,7 @@ class Profile : AppCompatActivity() {
                 .updateChildren(map2)
 
 
-            val email=view.editTextEmail.text.toString()
+            val email=editText4.text.toString()
             var updateEmail=email
             var map3= mutableMapOf<String,Any>()
             map3["email"]= updateEmail
@@ -158,7 +180,7 @@ class Profile : AppCompatActivity() {
                 .child(userId)
                 .updateChildren(map3)
 
-            val address=view.editTextAddress.text.toString()
+            val address=editText5.text.toString()
             var updateAddress=address
             var map4= mutableMapOf<String,Any>()
             map4["address"]= updateAddress
@@ -168,28 +190,12 @@ class Profile : AppCompatActivity() {
                 .child(userId)
                 .updateChildren(map4)
         }
-        view.buttonCancel.setOnClickListener {
-            alertDialog.dismiss()
-        }
+
+        builder.setNegativeButton("No"){p0,p1->}
+        val alert=builder.create()
+        alert.show()
 
 
-
-
-
-
-
-
-
-
-        builder.setPositiveButton("Update") { dialogInterface:DialogInterface, i:Int -> }
-
-        val customDialog=builder.create()
-        customDialog.getButton(AlertDialog.BUTTON_POSITIVE)
-
-
-
-
-        builder.setNegativeButton("No") {dialogInterface:DialogInterface, i:Int -> }
 
     }
 
@@ -218,10 +224,16 @@ class Profile : AppCompatActivity() {
 
             }
             R.id.menu_sign_out -> {
-                FirebaseAuth.getInstance().signOut()
-                val intent = Intent(this, Login::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+                val builder= AlertDialog.Builder(this)
+                builder.setTitle("ออกจากระบบ")
+                builder.setMessage("แน่ใจหรือไม่ว่าต้องการออกจากระบบ")
+
+                builder.setPositiveButton("ใช่",{ dialogInterface: DialogInterface, i: Int ->
+                    logout()
+                })
+
+                builder.setNegativeButton("ไม่",{ dialogInterface: DialogInterface, i: Int -> })
+                builder.show()
             }
         }
 
@@ -231,6 +243,12 @@ class Profile : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_menu, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+    fun logout(){
+        FirebaseAuth.getInstance().signOut()
+        val intent = Intent(this, Login::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 
 

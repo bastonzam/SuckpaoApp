@@ -39,7 +39,7 @@ class UserAdapter (val mCtx: Context, val layoutResId:Int, val UsersList:List<Us
         val showaddress=view.findViewById<TextView>(R.id.address)
 
         val showImage=view.findViewById<ImageView>(R.id.imageProfile)
-        val textViewUpdate=view.findViewById<TextView>(R.id.textViewUpdate)
+
 
 
 
@@ -71,15 +71,6 @@ class UserAdapter (val mCtx: Context, val layoutResId:Int, val UsersList:List<Us
         showemail.text=mail
         showaddress.text=Add
 
-        /*textViewUpdate.setOnClickListener {
-            showUpdateDialog(user)
-        }*/
-
-       // showImage.setOnClickListener{
-          //  var userid=user.userid
-          //  Log.d("Profile","User ID is $userid")
-
-       // }
 
 
 
@@ -94,61 +85,7 @@ class UserAdapter (val mCtx: Context, val layoutResId:Int, val UsersList:List<Us
 
 
         return view
-    }/*
-    fun showUpdateDialog(user: User) {
-
-
-        val uid = FirebaseAuth.getInstance().currentUser!!.uid
-
-        val builder= AlertDialog.Builder(mCtx)
-        builder.setTitle("Update User")
-
-        val inflater =LayoutInflater.from(mCtx)
-
-        val view=inflater.inflate(R.layout.update_user,null)
-
-        val editUsernames=view.findViewById<EditText>(R.id.editTextUsername)
-        val editNames=view.findViewById<EditText>(R.id.editTextName)
-        val editLastnames=view.findViewById<EditText>(R.id.editTextlastname)
-        val editEmails=view.findViewById<EditText>(R.id.editTextEmail)
-        val editAddresss=view.findViewById<EditText>(R.id.editTextAddress)
-
-        editUsernames.setText(user.username)
-        editNames.setText(user.name)
-        editLastnames.setText(user.lastname)
-        editEmails.setText(user.email)
-        editAddresss.setText(user.address)
-
-
-        builder.setView(view)
-
-        builder.setPositiveButton("Update") { p0, p1 -> }
-
-        val dbUser=FirebaseDatabase.getInstance().getReference("Users")
-
-        val username=editUsernames.text.toString().trim()
-        val name=editNames.text.toString().trim()
-        val lastname=editLastnames.text.toString().trim()
-        val email=editEmails.text.toString().trim()
-        val address=editAddresss.text.toString().trim()
-       /* if(username.isEmpty()||name.isEmpty()||lastname.isEmpty()||email.isEmpty()||address.isEmpty()){
-            editUsernames.error="กรุณากรอกทุกช่อง"
-            editUsernames.requestFocus()
-            return
-        }*/
-        val user = User(user.uid,username,name,lastname,email,address)
-
-        dbUser.child(uid).setValue(user)
-
-
-
-
-        builder.setNegativeButton("No") { p0, p1 -> }
-        val alert=builder.create()
-        alert.show()
-
-
-    }*/
+    }
 
 
 }

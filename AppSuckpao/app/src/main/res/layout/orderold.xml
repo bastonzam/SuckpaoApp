@@ -77,22 +77,6 @@
         app:layout_constraintStart_toEndOf="@+id/statusc"
         app:layout_constraintTop_toBottomOf="@+id/numc" />
 
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="57dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="76dp"
-        android:background="@android:color/transparent"
-        android:text="Finish"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_green_light"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
-        app:layout_constraintStart_toEndOf="@+id/showName"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/storec"
         android:layout_width="50dp"

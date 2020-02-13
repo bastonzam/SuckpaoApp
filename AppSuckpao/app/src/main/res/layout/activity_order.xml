@@ -5,16 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Order">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
-        android:layout_width="378dp"
-        android:layout_height="701dp"
+        android:layout_width="411dp"
+        android:layout_height="730dp"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="16dp"
@@ -25,12 +22,47 @@
 
         <ListView
             android:id="@+id/orderlist"
-            android:layout_width="371dp"
-            android:layout_height="688dp"
+            android:layout_width="413dp"
+            android:layout_height="287dp"
+            android:layout_marginTop="32dp"
+            android:fitsSystemWindows="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ListView
+            android:id="@+id/orderlistold"
+            android:layout_width="413dp"
+            android:layout_height="287dp"
+            android:layout_marginBottom="32dp"
             android:fitsSystemWindows="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="ออเดอร์ที่เสร็จแล้ว"
+            android:textColor="@color/blue"
+            app:layout_constraintBottom_toTopOf="@+id/orderlistold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.019"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="ออเดอร์ใหม่"
+            android:textColor="@color/blue"
+            app:layout_constraintBottom_toTopOf="@+id/orderlist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
